@@ -47,3 +47,10 @@ A full-featured, scalable, browser-based code execution environment built with t
 - MongoDB URI
 - AWS CLI configured
 
+<<<<<<< HEAD
+=======
+# TECH STACK : MERN STACK.
+# CLOUD SERVICE : AWS,Vultr
+# Devops : Kubernets to Scale, Docker.
+#
+>>>>>>> d01ec115c4b547f53d8762c653f0e7f37c2b723c
