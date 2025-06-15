@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ChevronRight, ChevronDown, File, Folder, Plus, MoreHorizontal } from 'lucide-react';
+import { ChevronRight, ChevronDown,Folder, Plus, MoreHorizontal } from 'lucide-react';
 
 interface FileExplorerProps {
   activeFile: string;
