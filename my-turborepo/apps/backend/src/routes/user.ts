@@ -1,9 +1,11 @@
 import express, { Request, Response } from "express";
-import {userSignInSchema,userSignupSchema} from "@repo/common/src/validation";
-import {prismaClient} from "@repo/db/src/index"
+import {userSignInSchema,userSignupSchema} from "@repo/common"
+import {prismaClient} from "@repo/db"
 import jwt from "jsonwebtoken";
-const router = express.Router();
+import dotenv from "dotenv";
+dotenv.config();
 
+const router = express.Router();
 
 router.post('/signup',async(req:Request,res:Response)=>{
     const { success } = userSignupSchema.safeParse(req.body);
@@ -18,7 +20,7 @@ router.post('/signup',async(req:Request,res:Response)=>{
             email:email
         }});
 
-        if(!existingUser){
+        if(existingUser){
             res.status(301).json({msg:"Already Account Exists!"})
             return;
         }
