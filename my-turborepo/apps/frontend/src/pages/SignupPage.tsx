@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Code, ArrowLeft, User } from 'lucide-react';
+import { signUp } from '../api/api';
 
 const SignupPage = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const [fullName, setFullName] = useState('');
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate signup
-    navigate('/dashboard');
+    try{
+      const response = await signUp({name,email,password});
+      const data = response?.data;
+      if(response?.status === 200){
+        navigate('/login')
+      }else{
+        console.error('Error!');
+      }
+   
+    }catch(error){
+      console.error(error);
+      return;
+    }
   };
 
   return (
@@ -49,8 +61,8 @@ const SignupPage = () => {
                 <input
                   id="fullName"
                   type="text"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
                   className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
                   placeholder="Enter your full name"
                   required

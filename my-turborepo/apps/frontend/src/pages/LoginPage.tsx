@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Mail, Lock, Eye, EyeOff, Code, ArrowLeft } from 'lucide-react';
+import { signIn } from '../api/api';
 
 const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -8,9 +9,16 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Simulate login
+    const response = await signIn({email,password});
+    const token = response?.data.token;
+      if(!token){
+      console.error("Empty Token");
+      alert("Auth Error!");
+      return;
+    }
+    localStorage.setItem('token',token);    
     navigate('/dashboard');
   };
 
